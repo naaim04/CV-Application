@@ -8,35 +8,43 @@ function App() {
   // This is the "lifting state up" idea, tidied: the whole app's data is these
   // three objects, and we pass just an object + its setter to each component.
   const [general, setGeneral] = useState({
-    name: '',
-    email: '',
-    phone: '',
+    name: 'Jake Ryan',
+    email: 'jake@su.edu',
+    phone: '123-456-7890',
   })
 
   const [education, setEducation] = useState({
-    schoolName: '',
-    title: '',
-    dateStart: '',
-    dateEnd: '',
-    location: '',
+    schoolName: 'Southwestern University',
+    title: 'Bachelor of Arts in Computer Science, Minor in Business',
+    dateStart: '2018-08-01',
+    dateEnd: '2021-05-01',
+    location: 'Georgetown, TX',
   })
 
   const [experience, setExperience] = useState({
-    companyName: '',
-    position: '',
-    jobLocation: '',
-    jobDateStart: '',
-    jobDateEnd: '',
-    expTasks: [''], // a list of bullet points; starts with one empty block
+    companyName: 'Texas A&M University',
+    position: 'Undergraduate Research Assistant',
+    jobLocation: 'College Station, TX',
+    jobDateStart: '2020-06-01',
+    jobDateEnd: '2021-05-01',
+    expTasks: [
+      'Developed a REST API using FastAPI and PostgreSQL to store data from learning management systems',
+      'Explored ways to visualize GitHub collaboration in a classroom setting',
+    ],
   })
 
-  const [projects, setProjects] = useState({
-    projectName: '',
-    projectDateStart: '',
-    projectDateEnd: '',
-    projTasks: [''], // a list of bullet points; starts with one empty block
-
-  })
+  // A LIST of projects now, so we can add more than one.
+  const [projects, setProjects] = useState([
+    {
+      projectName: 'Gitlytics',
+      projectDateStart: '2020-06-01',
+      projectDateEnd: '2020-08-01',
+      projTasks: [
+        'Built a full-stack web app with React and Flask to analyze GitHub data',
+        'Implemented GitHub OAuth to pull data from user repositories',
+      ],
+    },
+  ])
 
   return (
     <div className="app">

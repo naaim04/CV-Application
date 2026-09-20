@@ -1,4 +1,4 @@
-/* Two-column layout: sidebar (forms) on the left, resume on the right. */
+/* ============ App shell: sidebar (forms) left, resume right ============ */
 .app {
   display: flex;
   gap: 24px;
@@ -14,16 +14,7 @@
   gap: 16px;
 }
 
-.resume {
-  flex: 1;
-  min-height: 400px;
-  padding: 32px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg);
-}
-
-/* A form/section box in the sidebar */
+/* ============ Sidebar form boxes ============ */
 .section {
   display: flex;
   flex-direction: column;
@@ -66,21 +57,8 @@
   border-color: var(--accent-border);
 }
 
-.resume-header {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 16px;
-  text-align: center;
-}
-
-.resume-header h1 {
-  margin: 0 0 8px;
-  font-size: 40px;
-}
-.resume-name {
-  text-align: center;
-}
-/* Description block: label + a column of bullet input rows + the add button */
-.tasks {
+/* The "Description" bullet-editor block in the sidebar */
+.expTasks {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -88,7 +66,27 @@
   color: var(--text);
 }
 
-/* One bullet's input sits next to its × remove button */
+/* Each project's editing block in the sidebar */
+.project-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+.block-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.block-head button {
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
 .task-row {
   display: flex;
   gap: 6px;
@@ -104,20 +102,103 @@
   color: var(--text-h);
 }
 
-/* The bullet list on the resume side */
-.bullets {
-  margin: 8px 0 0;
-  padding-left: 20px;
+
+.resume {
+  flex: 1;
+  min-height: 400px;
+  position: sticky; /* pins the resume in view while the sidebar scrolls */
+  top: 24px; /* distance from the top when stuck */
+  align-self: flex-start; /* keep it content-height so it can stick */
+  padding: 44px 52px;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  font-family: 'Latin Modern Roman', Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
-/* One education line: left item sticks left, right item sticks to the far end. */
-.edu-row {
+.resume-header {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.resume-name {
+  margin: 0 0 4px;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #000000;
+}
+
+.contact {
+  margin: 0;
+  font-size: 13px;
+  color: #333333;
+}
+
+/* Section title: small-caps with a full-width rule beneath */
+.resume-section {
+  margin-bottom: 14px;
+}
+
+.resume-section h2 {
+  margin: 0 0 6px;
+  padding-bottom: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  color: #000000;
+  border-bottom: 1px solid #000000;
+}
+
+/* One school / job / project block */
+.entry {
+  margin-bottom: 8px;
+}
+
+/* A line with content pushed to both ends */
+.entry-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
 }
 
+.entry-title {
+  font-weight: 700;
+}
+
+.entry-meta {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.entry-sub,
+.entry-sub-meta {
+  font-style: italic;
+  font-size: 13.5px;
+}
+
+.entry-sub-meta {
+  white-space: nowrap;
+}
+
+/* Bullet points under an entry */
+.bullets {
+  margin: 3px 0 0;
+  padding-left: 18px;
+}
+
+.bullets li {
+  font-size: 13.5px;
+  margin-bottom: 2px;
+}
+
+/* ============ Responsive ============ */
 @media (max-width: 768px) {
   .app {
     flex-direction: column;

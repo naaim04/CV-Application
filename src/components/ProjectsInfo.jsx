@@ -1,93 +1,43 @@
-import { useState } from 'react'
+import Project from './Project'
 
-// Receives the `projects` object and its setter from App (through Sidebar).
+// `projects` is an ARRAY. This component only manages the LIST: add a project,
+// remove one, or replace one with its updated version. Each individual project's
+// editing lives in the <Project> child.
 function ProjectsInfo({ projects, setProjects }) {
-  const [isEditing, setIsEditing] = useState(true)
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    setIsEditing(false)
-  }
-
-  // One handler for the simple text/date fields.
-  function handleChange(e) {
-    const { name, value } = e.target
-    setProjects({ ...projects, [name]: value })
-  }
-
-  // projTasks is an ARRAY inside the projects object — same helper pattern as
-  // PracticalInfo's expTasks: rebuild the array, then wrap it back in a fresh
-  // projects object.
-  function updateTask(index, value) {
-    setProjects({
+  function addProject() {
+    setProjects([
       ...projects,
-      projTasks: projects.projTasks.map((task, i) => (i === index ? value : task)),
-    })
+      { projectName: '', projectDateStart: '', projectDateEnd: '', projTasks: [''] },
+    ])
   }
 
-  function addTask() {
-    setProjects({ ...projects, projTasks: [...projects.projTasks, ''] })
+  function removeProject(index) {
+    setProjects(projects.filter((_, i) => i !== index))
   }
 
-  function removeTask(index) {
-    setProjects({
-      ...projects,
-      projTasks: projects.projTasks.filter((_, i) => i !== index),
-    })
+  // Replace project #index with the updated version the child sent up.
+  function updateProject(index, updated) {
+    const copy = [...projects] // copy the array
+    copy[index] = updated // swap in the new version of this one project
+    setProjects(copy)
   }
 
-  if (isEditing) {
-    return (
-      <form className="section" onSubmit={handleSubmit}>
-        <h2>Projects</h2>
-        <label>
-          Project Name
-          <input
-            type="text"
-            name="projectName"
-            value={projects.projectName}
-            onChange={handleChange}
-          />
-        </label>
-        <div className="expTasks">
-          Project Description
-          {projects.projTasks.map((task, index) => (
-            <div className="task-row" key={index}>
-              <input
-                type="text"
-                value={task}
-                onChange={(e) => updateTask(index, e.target.value)}
-              />
-              <button type="button" onClick={() => removeTask(index)}>
-                ×
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addTask}>
-            + Add bullet
-          </button>
-        </div>
-        <label>
-          Start Date
-          <input
-            type="date"
-            name="projectDateStart"
-            value={projects.projectDateStart}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          End Date
-          <input
-            type="date"
-            name="projectDateEnd"
-            value={projects.projectDateEnd}
-            onChange={handleChange}
-          />
-        </label>
-      </form>
-    )
-  }
+  return (
+    <div className="section">
+      <h2>Projects</h2>
+      {projects.map((project, index) => (
+        <Project
+          key={index}
+          project={project}
+          onChange={(updated) => updateProject(index, updated)}
+          onRemove={() => removeProject(index)}
+        />
+      ))}
+      <button type="button" onClick={addProject}>
+        + Add project
+      </button>
+    </div>
+  )
 }
 
 export default ProjectsInfo
