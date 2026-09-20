@@ -11,7 +11,7 @@ function Resume({
   location,
   companyName,
   position,
-  tasks,
+  expTasks,
   jobDateStart,
   jobDateEnd,
 }) {
@@ -44,19 +44,26 @@ function Resume({
       </div>
       <div className="resume-body">
         <section className="resume-section">
-          <h2>Practical Experience</h2>
+          <h2>Experience</h2>
           <div className="edu-row">
             <span>{position}</span>
-            <span>{companyName}</span>
-          </div>
-          <div className="edu-row">
-            <span>{tasks}</span>
             <span>
               {jobDateStart}
               {jobDateStart && jobDateEnd ? ' to ' : ''}
               {jobDateEnd}
             </span>
           </div>
+          <div className="edu-row">
+            <span>{companyName}</span>
+          </div>
+          {/* One <li> per non-empty bullet in the expTasks array */}
+          <ul className="bullets">
+            {expTasks
+              .filter((task) => task)
+              .map((task, index) => (
+                <li key={index}>{task}</li>
+              ))}
+          </ul>
         </section>
       </div>
     </main>

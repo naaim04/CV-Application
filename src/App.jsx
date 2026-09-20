@@ -19,7 +19,7 @@ function App() {
   // Practical fields — same idea, shared between the form and the resume.
   const [companyName, setCompanyName] = useState('')
   const [position, setPosition] = useState('')
-  const [tasks, setTasks] = useState('')
+  const [expTasks, setExpTasks] = useState(['']) // a list of bullet points; starts with one empty block
   const [jobDateStart, setJobDateStart] = useState('')
   const [jobDateEnd, setJobDateEnd] = useState('')
 
@@ -48,12 +48,12 @@ function App() {
         setLocation={setLocation}
         companyName={companyName}
         position={position}
-        tasks={tasks}
+        expTasks={expTasks}
         jobDateStart={jobDateStart}
         jobDateEnd={jobDateEnd}
         setCompanyName={setCompanyName}
         setPosition={setPosition}
-        setTasks={setTasks}
+        setExpTasks={setExpTasks}
         setJobDateStart={setJobDateStart}
         setJobDateEnd={setJobDateEnd}
       />
@@ -68,7 +68,7 @@ function App() {
         location={location}
         companyName={companyName}
         position={position}
-        tasks={tasks}
+        expTasks={expTasks}
         jobDateStart={jobDateStart}
         jobDateEnd={jobDateEnd}
       />

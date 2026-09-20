@@ -25,7 +25,7 @@ function EducationalInfo({
   if (isEditing) {
     return (
       <form className="section" onSubmit={handleSubmit}>
-        <h2>Educational Experience</h2>
+        <h2>Education</h2>
         <label>
           School Name
           <input

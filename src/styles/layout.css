@@ -79,6 +79,37 @@
 .resume-name {
   text-align: center;
 }
+/* Description block: label + a column of bullet input rows + the add button */
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* One bullet's input sits next to its × remove button */
+.task-row {
+  display: flex;
+  gap: 6px;
+}
+
+.task-row input {
+  flex: 1;
+  padding: 8px;
+  font-size: 15px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+/* The bullet list on the resume side */
+.bullets {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
 /* One education line: left item sticks left, right item sticks to the far end. */
 .edu-row {
   display: flex;

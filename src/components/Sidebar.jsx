@@ -23,12 +23,12 @@ function Sidebar({
   setLocation,
   companyName,
   position,
-  tasks,
+  expTasks,
   jobDateStart,
   jobDateEnd,
   setCompanyName,
   setPosition,
-  setTasks,
+  setExpTasks,
   setJobDateStart,
   setJobDateEnd,
 }) {
@@ -59,12 +59,12 @@ function Sidebar({
       <PracticalInfo
         companyName={companyName}
         position={position}
-        tasks={tasks}
+        expTasks={expTasks}
         jobDateStart={jobDateStart}
         jobDateEnd={jobDateEnd}
         setCompanyName={setCompanyName}
         setPosition={setPosition}
-        setTasks={setTasks}
+        setExpTasks={setExpTasks}
         setJobDateStart={setJobDateStart}
         setJobDateEnd={setJobDateEnd}
       />
