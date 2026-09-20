@@ -12,6 +12,8 @@ function EducationalInfo({
   setTitle,
   setDateStart,
   setDateEnd,
+  location,
+  setLocation,
 }) {
   const [isEditing, setIsEditing] = useState(true)
 
@@ -56,6 +58,15 @@ function EducationalInfo({
             onChange={(e) => setDateEnd(e.target.value)}
           />
         </label>
+        <label>
+          Location
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </label>
+
       </form>
     )
   }

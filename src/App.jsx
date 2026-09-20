@@ -10,6 +10,14 @@ function App() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
 
+  // Education fields — same idea, shared between the form and the resume.
+  const [schoolName, setSchoolName] = useState('')
+  const [title, setTitle] = useState('')
+  const [dateStart, setDateStart] = useState('')
+  const [dateEnd, setDateEnd] = useState('')
+  const [location, setLocation] = useState('')
+  
+
   return (
     <div className="app">
       {/* Pass the values DOWN, plus the setter functions DOWN.
@@ -22,8 +30,28 @@ function App() {
         setName={setName}
         setEmail={setEmail}
         setPhone={setPhone}
+        schoolName={schoolName}
+        title={title}
+        dateStart={dateStart}
+        dateEnd={dateEnd}
+        setSchoolName={setSchoolName}
+        setTitle={setTitle}
+        setDateStart={setDateStart}
+        setDateEnd={setDateEnd}
+        location={location}
+        setLocation={setLocation}
       />
-      <Resume name={name} email={email} phone={phone} />
+      <Resume
+        name={name}
+        email={email}
+        phone={phone}
+        schoolName={schoolName}
+        title={title}
+        dateStart={dateStart}
+        dateEnd={dateEnd}
+        location={location} 
+      />
+      {/* Resume only DISPLAYS, so it gets values — no setters. */}
     </div>
   )
 }

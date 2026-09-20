@@ -69,11 +69,22 @@
 .resume-header {
   border-bottom: 1px solid var(--border);
   padding-bottom: 16px;
+  text-align: center;
 }
 
 .resume-header h1 {
   margin: 0 0 8px;
   font-size: 40px;
+}
+.resume-name {
+  text-align: center;
+}
+/* One education line: left item sticks left, right item sticks to the far end. */
+.edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
 }
 
 @media (max-width: 768px) {

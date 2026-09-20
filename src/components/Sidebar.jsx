@@ -18,6 +18,8 @@ function Sidebar({
   setTitle,
   setDateStart,
   setDateEnd,
+  location,
+  setLocation,
 }) {
   return (
     <aside className="sidebar">
@@ -39,6 +41,8 @@ function Sidebar({
         setTitle={setTitle}
         setDateStart={setDateStart}
         setDateEnd={setDateEnd}
+        location={location}
+        setLocation={setLocation}
       />
 
     </aside>
