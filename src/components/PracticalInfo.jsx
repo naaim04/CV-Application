@@ -1,91 +1,110 @@
 import { useState } from 'react'
 
-function PracticalInfo({companyName, position, jobDateStart, jobDateEnd, setCompanyName, setPosition, setJobDateStart, setJobDateEnd, expTasks, setExpTasks}) {
-    const [isEditing, setIsEditing] = useState(true)
+// Receives the `experience` object and its setter from App (through Sidebar).
+function PracticalInfo({ experience, setExperience }) {
+  const [isEditing, setIsEditing] = useState(true)
 
-    function handleSubmit(e) {
-        e.preventDefault() // stop the browser from reloading the page on submit
-        setIsEditing(false)
-    }
+  function handleSubmit(e) {
+    e.preventDefault()
+    setIsEditing(false)
+  }
 
-    // Change ONE bullet (the one at `index`), keeping all the others.
-    // .map builds a brand-new array — we never edit the old one directly.
-    function updateTask(index, value) {
-        setExpTasks(expTasks.map((task, i) => (i === index ? value : task)))
-    }
+  // One handler for the simple text/date fields.
+  function handleChange(e) {
+    const { name, value } = e.target
+    setExperience({ ...experience, [name]: value })
+  }
 
-    // Add a new empty bullet to the end of the list.
-    // [...expTasks, ''] = "all the current items, plus one more empty string".
-    function addTask() {
-        setExpTasks([...expTasks, ''])
-    }
+  // expTasks is an ARRAY living inside the experience object, so each helper
+  // rebuilds the array AND wraps it back into a fresh experience object.
+  function updateTask(index, value) {
+    setExperience({
+      ...experience,
+      expTasks: experience.expTasks.map((task, i) => (i === index ? value : task)),
+    })
+  }
 
-    // Remove the bullet at `index`. .filter keeps every item EXCEPT that one.
-    function removeTask(index) {
-        setExpTasks(expTasks.filter((task, i) => i !== index))
-    }
+  function addTask() {
+    setExperience({ ...experience, expTasks: [...experience.expTasks, ''] })
+  }
 
-    if (isEditing) {
-        return (
-            <form className="section" onSubmit={handleSubmit}>
-                <h2>Experience</h2>
-                <label>
-                    Company Name
-                    <input
-                        type="text"
-                        value={companyName}
-                        onChange={(e) => setCompanyName(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Position
-                    <input
-                        type="text"
-                        value={position}
-                        onChange={(e) => setPosition(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Start Date
-                    <input
-                        type="date"
-                        value={jobDateStart}
-                        onChange={(e) => setJobDateStart(e.target.value)}
-                    />
-                </label>
-                <label>
-                    End Date
-                    <input
-                        type="date"
-                        value={jobDateEnd}
-                        onChange={(e) => setJobDateEnd(e.target.value)}
-                    />
-                </label>
-                <div className="expTasks">
-                    Description
-                    {/* One input block per item in the expTasks array.
-                        `index` is the item's position (0, 1, 2...). */}
-                    {expTasks.map((task, index) => (
-                        <div className="task-row" key={index}>
-                            <input
-                                type="text"
-                                value={task}
-                                onChange={(e) => updateTask(index, e.target.value)}
-                            />
-                            {/* type="button" so it does NOT submit the form */}
-                            <button type="button" onClick={() => removeTask(index)}>
-                                ×
-                            </button>
-                        </div>
-                    ))}
-                    <button type="button" onClick={addTask}>
-                        + Add bullet
-                    </button>
-                </div>
-            </form>
-        )
-    }
+  function removeTask(index) {
+    setExperience({
+      ...experience,
+      expTasks: experience.expTasks.filter((_, i) => i !== index),
+    })
+  }
 
+  if (isEditing) {
+    return (
+      <form className="section" onSubmit={handleSubmit}>
+        <h2>Experience</h2>
+        <label>
+          Company Name
+          <input
+            type="text"
+            name="companyName"
+            value={experience.companyName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Position
+          <input
+            type="text"
+            name="position"
+            value={experience.position}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Location
+          <input
+            type="text"
+            name="jobLocation"
+            value={experience.jobLocation}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Start Date
+          <input
+            type="date"
+            name="jobDateStart"
+            value={experience.jobDateStart}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          End Date
+          <input
+            type="date"
+            name="jobDateEnd"
+            value={experience.jobDateEnd}
+            onChange={handleChange}
+          />
+        </label>
+        <div className="expTasks">
+          Description
+          {experience.expTasks.map((task, index) => (
+            <div className="task-row" key={index}>
+              <input
+                type="text"
+                value={task}
+                onChange={(e) => updateTask(index, e.target.value)}
+              />
+              <button type="button" onClick={() => removeTask(index)}>
+                ×
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addTask}>
+            + Add bullet
+          </button>
+        </div>
+      </form>
+    )
+  }
 }
 
 export default PracticalInfo

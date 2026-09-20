@@ -1,20 +1,22 @@
 import { useState } from 'react'
 
-// This component receives the shared values + setters from App (via Sidebar).
-function GeneralInfo({ name, email, phone, setName, setEmail, setPhone }) {
-  // LOCAL state: only THIS box cares whether it's showing inputs or read-only
-  // text. Nothing else needs it, so it stays here instead of being lifted.
+// Receives the `general` object and its setter from App (through Sidebar).
+function GeneralInfo({ general, setGeneral }) {
   const [isEditing, setIsEditing] = useState(true)
 
   function handleSubmit(e) {
     e.preventDefault() // stop the browser from reloading the page on submit
-    setIsEditing(false) // collapse this section to read-only text
+    setIsEditing(false)
   }
 
-  // EDIT MODE: show the input fields.
-  // Each input is "controlled": its value comes from state (value={name}),
-  // and every keystroke calls the setter (onChange). Because that state lives
-  // in App, typing here also updates the Resume live.
+  // ONE handler for every field. The input's `name` attribute says which key
+  // to change; { ...general, [name]: value } copies the object and overwrites
+  // just that one field.
+  function handleChange(e) {
+    const { name, value } = e.target
+    setGeneral({ ...general, [name]: value })
+  }
+
   if (isEditing) {
     return (
       <form className="section" onSubmit={handleSubmit}>
@@ -23,30 +25,32 @@ function GeneralInfo({ name, email, phone, setName, setEmail, setPhone }) {
           Name
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={general.name}
+            onChange={handleChange}
           />
         </label>
         <label>
           Email
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={general.email}
+            onChange={handleChange}
           />
         </label>
         <label>
           Phone
           <input
             type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            name="phone"
+            value={general.phone}
+            onChange={handleChange}
           />
         </label>
       </form>
     )
   }
-
 }
 
 export default GeneralInfo

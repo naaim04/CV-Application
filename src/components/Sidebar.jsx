@@ -1,74 +1,26 @@
 import GeneralInfo from './GeneralInfo'
 import EducationalInfo from './EducationalInfo'
 import PracticalInfo from './PracticalInfo'
+import ProjectsInfo from './ProjectsInfo'
 
-// Sidebar owns NO state. It's just a container that arranges the form
-// components and passes props straight through to them ("prop drilling").
+// Sidebar owns NO state. It just hands each section's object + setter to the
+// right form component. Notice how short the prop list is now (6 vs ~25).
 function Sidebar({
-  name,
-  email,
-  phone,
-  setName,
-  setEmail,
-  setPhone,
-  schoolName,
-  title,
-  dateStart,
-  dateEnd,
-  setSchoolName,
-  setTitle,
-  setDateStart,
-  setDateEnd,
-  location,
-  setLocation,
-  companyName,
-  position,
-  expTasks,
-  jobDateStart,
-  jobDateEnd,
-  setCompanyName,
-  setPosition,
-  setExpTasks,
-  setJobDateStart,
-  setJobDateEnd,
+  general,
+  setGeneral,
+  education,
+  setEducation,
+  experience,
+  setExperience,
+  projects,
+  setProjects,
 }) {
   return (
     <aside className="sidebar">
-      <GeneralInfo
-        name={name}
-        email={email}
-        phone={phone}
-        setName={setName}
-        setEmail={setEmail}
-        setPhone={setPhone}
-      />
-
-      <EducationalInfo
-        schoolName={schoolName}
-        title={title}
-        dateStart={dateStart}
-        dateEnd={dateEnd}
-        setSchoolName={setSchoolName}
-        setTitle={setTitle}
-        setDateStart={setDateStart}
-        setDateEnd={setDateEnd}
-        location={location}
-        setLocation={setLocation}
-      />
-
-      <PracticalInfo
-        companyName={companyName}
-        position={position}
-        expTasks={expTasks}
-        jobDateStart={jobDateStart}
-        jobDateEnd={jobDateEnd}
-        setCompanyName={setCompanyName}
-        setPosition={setPosition}
-        setExpTasks={setExpTasks}
-        setJobDateStart={setJobDateStart}
-        setJobDateEnd={setJobDateEnd}
-      />
-
+      <GeneralInfo general={general} setGeneral={setGeneral} />
+      <EducationalInfo education={education} setEducation={setEducation} />
+      <PracticalInfo experience={experience} setExperience={setExperience} />
+      <ProjectsInfo projects={projects} setProjects={setProjects} />
     </aside>
   )
 }

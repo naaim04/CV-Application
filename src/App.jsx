@@ -4,75 +4,55 @@ import Resume from './components/Resume'
 import './styles/layout.css'
 
 function App() {
-  // SHARED state: both the form (Sidebar > GeneralInfo) and the display (Resume)
-  // need these, so they live here in the closest common parent — "lifting state up".
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  // Each CV section is ONE object of state instead of many loose variables.
+  // This is the "lifting state up" idea, tidied: the whole app's data is these
+  // three objects, and we pass just an object + its setter to each component.
+  const [general, setGeneral] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  })
 
-  // Education fields — same idea, shared between the form and the resume.
-  const [schoolName, setSchoolName] = useState('')
-  const [title, setTitle] = useState('')
-  const [dateStart, setDateStart] = useState('')
-  const [dateEnd, setDateEnd] = useState('')
-  const [location, setLocation] = useState('')
-  // Practical fields — same idea, shared between the form and the resume.
-  const [companyName, setCompanyName] = useState('')
-  const [position, setPosition] = useState('')
-  const [expTasks, setExpTasks] = useState(['']) // a list of bullet points; starts with one empty block
-  const [jobDateStart, setJobDateStart] = useState('')
-  const [jobDateEnd, setJobDateEnd] = useState('')
+  const [education, setEducation] = useState({
+    schoolName: '',
+    title: '',
+    dateStart: '',
+    dateEnd: '',
+    location: '',
+  })
 
+  const [experience, setExperience] = useState({
+    companyName: '',
+    position: '',
+    jobLocation: '',
+    jobDateStart: '',
+    jobDateEnd: '',
+    expTasks: [''], // a list of bullet points; starts with one empty block
+  })
+
+  const [projects, setProjects] = useState({
+    projectName: '',
+    projectDateStart: '',
+    projectDateEnd: '',
+    projTasks: [''], // a list of bullet points; starts with one empty block
+
+  })
 
   return (
     <div className="app">
-      {/* Pass the values DOWN, plus the setter functions DOWN.
-          The inputs will call the setters, which updates state HERE,
-          which re-renders BOTH the sidebar and the resume. */}
+      {/* Pass each section's object DOWN, plus its setter. The forms read from
+          the object and call the setter to update it; the resume just reads. */}
       <Sidebar
-        name={name}
-        email={email}
-        phone={phone}
-        setName={setName}
-        setEmail={setEmail}
-        setPhone={setPhone}
-        schoolName={schoolName}
-        title={title}
-        dateStart={dateStart}
-        dateEnd={dateEnd}
-        setSchoolName={setSchoolName}
-        setTitle={setTitle}
-        setDateStart={setDateStart}
-        setDateEnd={setDateEnd}
-        location={location}
-        setLocation={setLocation}
-        companyName={companyName}
-        position={position}
-        expTasks={expTasks}
-        jobDateStart={jobDateStart}
-        jobDateEnd={jobDateEnd}
-        setCompanyName={setCompanyName}
-        setPosition={setPosition}
-        setExpTasks={setExpTasks}
-        setJobDateStart={setJobDateStart}
-        setJobDateEnd={setJobDateEnd}
+        general={general}
+        setGeneral={setGeneral}
+        education={education}
+        setEducation={setEducation}
+        experience={experience}
+        setExperience={setExperience}
+        projects={projects}
+        setProjects={setProjects}
       />
-      <Resume
-        name={name}
-        email={email}
-        phone={phone}
-        schoolName={schoolName}
-        title={title}
-        dateStart={dateStart}
-        dateEnd={dateEnd}
-        location={location}
-        companyName={companyName}
-        position={position}
-        expTasks={expTasks}
-        jobDateStart={jobDateStart}
-        jobDateEnd={jobDateEnd}
-      />
-      {/* Resume only DISPLAYS, so it gets values — no setters. */}
+      <Resume general={general} education={education} experience={experience} projects={projects}  />
     </div>
   )
 }

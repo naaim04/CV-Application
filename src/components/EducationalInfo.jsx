@@ -1,25 +1,18 @@
 import { useState } from 'react'
 
-// Mirrors GeneralInfo: receives the shared education values + setters from App
-// (through Sidebar). Fields are controlled inputs, so typing updates App's
-// state and the Resume live.
-function EducationalInfo({
-  schoolName,
-  title,
-  dateStart,
-  dateEnd,
-  setSchoolName,
-  setTitle,
-  setDateStart,
-  setDateEnd,
-  location,
-  setLocation,
-}) {
+// Receives the `education` object and its setter from App (through Sidebar).
+function EducationalInfo({ education, setEducation }) {
   const [isEditing, setIsEditing] = useState(true)
 
   function handleSubmit(e) {
-    e.preventDefault() // stop the browser from reloading the page on submit
+    e.preventDefault()
     setIsEditing(false)
+  }
+
+  // Same one-handler pattern as GeneralInfo: input `name` picks the field.
+  function handleChange(e) {
+    const { name, value } = e.target
+    setEducation({ ...education, [name]: value })
   }
 
   if (isEditing) {
@@ -30,43 +23,47 @@ function EducationalInfo({
           School Name
           <input
             type="text"
-            value={schoolName}
-            onChange={(e) => setSchoolName(e.target.value)}
+            name="schoolName"
+            value={education.schoolName}
+            onChange={handleChange}
           />
         </label>
         <label>
           Title
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            name="title"
+            value={education.title}
+            onChange={handleChange}
           />
         </label>
         <label>
           Start Date
           <input
             type="date"
-            value={dateStart}
-            onChange={(e) => setDateStart(e.target.value)}
+            name="dateStart"
+            value={education.dateStart}
+            onChange={handleChange}
           />
         </label>
         <label>
           End Date
           <input
             type="date"
-            value={dateEnd}
-            onChange={(e) => setDateEnd(e.target.value)}
+            name="dateEnd"
+            value={education.dateEnd}
+            onChange={handleChange}
           />
         </label>
         <label>
           Location
           <input
             type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            name="location"
+            value={education.location}
+            onChange={handleChange}
           />
         </label>
-
       </form>
     )
   }
