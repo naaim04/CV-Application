@@ -9,11 +9,16 @@ function Resume({
   dateStart,
   dateEnd,
   location,
+  companyName,
+  position,
+  tasks,
+  jobDateStart,
+  jobDateEnd,
 }) {
   return (
     <main className="resume">
       <header className="resume-header">
-        <h1 >{name}</h1>
+        <h1>{name}</h1>
         <p>
           {email}
           {email && phone ? ' · ' : ''}
@@ -33,6 +38,23 @@ function Resume({
               {dateStart}
               {dateStart && dateEnd ? ' to ' : ''}
               {dateEnd}
+            </span>
+          </div>
+        </section>
+      </div>
+      <div className="resume-body">
+        <section className="resume-section">
+          <h2>Practical Experience</h2>
+          <div className="edu-row">
+            <span>{position}</span>
+            <span>{companyName}</span>
+          </div>
+          <div className="edu-row">
+            <span>{tasks}</span>
+            <span>
+              {jobDateStart}
+              {jobDateStart && jobDateEnd ? ' to ' : ''}
+              {jobDateEnd}
             </span>
           </div>
         </section>

@@ -1,5 +1,6 @@
 import GeneralInfo from './GeneralInfo'
 import EducationalInfo from './EducationalInfo'
+import PracticalInfo from './PracticalInfo'
 
 // Sidebar owns NO state. It's just a container that arranges the form
 // components and passes props straight through to them ("prop drilling").
@@ -20,6 +21,16 @@ function Sidebar({
   setDateEnd,
   location,
   setLocation,
+  companyName,
+  position,
+  tasks,
+  jobDateStart,
+  jobDateEnd,
+  setCompanyName,
+  setPosition,
+  setTasks,
+  setJobDateStart,
+  setJobDateEnd,
 }) {
   return (
     <aside className="sidebar">
@@ -43,6 +54,19 @@ function Sidebar({
         setDateEnd={setDateEnd}
         location={location}
         setLocation={setLocation}
+      />
+
+      <PracticalInfo
+        companyName={companyName}
+        position={position}
+        tasks={tasks}
+        jobDateStart={jobDateStart}
+        jobDateEnd={jobDateEnd}
+        setCompanyName={setCompanyName}
+        setPosition={setPosition}
+        setTasks={setTasks}
+        setJobDateStart={setJobDateStart}
+        setJobDateEnd={setJobDateEnd}
       />
 
     </aside>

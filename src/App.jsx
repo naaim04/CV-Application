@@ -16,7 +16,13 @@ function App() {
   const [dateStart, setDateStart] = useState('')
   const [dateEnd, setDateEnd] = useState('')
   const [location, setLocation] = useState('')
-  
+  // Practical fields — same idea, shared between the form and the resume.
+  const [companyName, setCompanyName] = useState('')
+  const [position, setPosition] = useState('')
+  const [tasks, setTasks] = useState('')
+  const [jobDateStart, setJobDateStart] = useState('')
+  const [jobDateEnd, setJobDateEnd] = useState('')
+
 
   return (
     <div className="app">
@@ -40,6 +46,16 @@ function App() {
         setDateEnd={setDateEnd}
         location={location}
         setLocation={setLocation}
+        companyName={companyName}
+        position={position}
+        tasks={tasks}
+        jobDateStart={jobDateStart}
+        jobDateEnd={jobDateEnd}
+        setCompanyName={setCompanyName}
+        setPosition={setPosition}
+        setTasks={setTasks}
+        setJobDateStart={setJobDateStart}
+        setJobDateEnd={setJobDateEnd}
       />
       <Resume
         name={name}
@@ -49,7 +65,12 @@ function App() {
         title={title}
         dateStart={dateStart}
         dateEnd={dateEnd}
-        location={location} 
+        location={location}
+        companyName={companyName}
+        position={position}
+        tasks={tasks}
+        jobDateStart={jobDateStart}
+        jobDateEnd={jobDateEnd}
       />
       {/* Resume only DISPLAYS, so it gets values — no setters. */}
     </div>
